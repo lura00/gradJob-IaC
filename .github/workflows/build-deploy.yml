@@ -20,7 +20,7 @@ jobs:
     - name: Terraform Init
       run: terraform init
       env:
-        GOOGLE_CREDENTIALS: ${{ secret.GKE_KEY }}
+        GOOGLE_CREDENTIALS: ${{ secrets.GKE_KEY }}
     
     - name: Terraform Format
       run: terraform fmt -check
@@ -28,9 +28,9 @@ jobs:
     - name: Terraform plan
       run: terraform plan
       env: 
-        GOOGLE_CREDENTIALS: ${{ secret.GKE_KEY }}
+        GOOGLE_CREDENTIALS: ${{ secrets.GKE_KEY }}
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
       env: 
-        GOOGLE_CREDENTIALS: ${{ secret.GKE_KEY }}
+        GOOGLE_CREDENTIALS: ${{ secrets.GKE_KEY }}
