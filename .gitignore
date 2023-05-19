@@ -1,2 +1,8 @@
 breakingbad-gke-gradjob-30d6e875263f.json
 .terraform
+#  Local .terraform directories
+**/.terraform/*
+	
+# .tfstate files
+*.tfstate
+*.tfstate.*
