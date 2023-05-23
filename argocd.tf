@@ -6,7 +6,7 @@ provider "kubectl" {
 }
 
 data "kubectl_file_documents" "namespace" {
-    content = file("manifests/argocd/argocd_namespace.yaml")
+  content = file("manifests/argocd/argocd_namespace.yaml")
 }
 
 data "kubectl_file_documents" "argocd" {
@@ -17,9 +17,9 @@ data "kubectl_file_documents" "argocd_image_updater" {
   content = file("manifests/argocd/install_argocd_image_updater.yaml")
 }
 resource "kubectl_manifest" "namespace" {
-    count     = length(data.kubectl_file_documents.namespace.documents)
-    yaml_body = element(data.kubectl_file_documents.namespace.documents, count.index)
-    override_namespace = "argocd"
+  count              = length(data.kubectl_file_documents.namespace.documents)
+  yaml_body          = element(data.kubectl_file_documents.namespace.documents, count.index)
+  override_namespace = "argocd"
 }
 
 resource "kubectl_manifest" "argocd" {
