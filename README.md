@@ -18,6 +18,12 @@ The files set up and configure network settings and GKE cluster settings in Goog
     To set up Argo run the pipeline, remember to set your Github secrets and GCP project ID accordingly.
     When the pipeline is done check that the pods is running. Go to Kubernetes Egninge ==> Services and Ingress. You should see the services here.
     It is now time to set connect to gcloud in your local CLI. 
+    - sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
+    - gke-gcloud-auth-plugin --version 
+    - export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+    - source ~/.bashrc
+    - gcloud components update
+    - gcloud container clusters get-credentials CLUSTER_NAME
     - gcloud init
     - gcloud auth login (Choose the email connected to your GCP project)
     - gcloud config set project <your project ID>
