@@ -29,6 +29,7 @@ The files set up and configure network settings and GKE cluster settings in Goog
     Go back to GCP now and click on the argocd-server endpoint address with port 80.
     username is admin to get the password run:
     - kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.  password}" | base64 -d; echo
+    - echo <password value from above script> | base64 --decode
     Once Argo is up there is a set of configuration to do, start with click on:
     - New app
         - Add project name
