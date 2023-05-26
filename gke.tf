@@ -6,14 +6,30 @@ resource "google_container_cluster" "primary" {
   name     = "${var.project_id}-gke"
   location = var.location
 
-  # We can't create a cluster with no node pool defined, but we want to only use
-  # separately managed node pools. So we create the smallest possible default
-  # node pool and immediately delete it.
-  remove_default_node_pool = true
-  initial_node_count       = 3
+  resource "google_container_cluster" "k8s_cluster" {
+    cluster_autoscaling {
+      enabled = true
+      autoscaling_profile = "OPTIMIZE_UTILIZATION"
+      resource_limits {
+        resource_type = "cpu"
+        minimum = 1
+        maximum = 4
+      }
+      resource_limits {
+        resource_type = "memory"
+        minimum = 4
+        maximum = 16
+      }
+    }
+    # We can't create a cluster with no node pool defined, but we want to only use
+    # separately managed node pools. So we create the smallest possible default
+    # node pool and immediately delete it.
+    remove_default_node_pool = true
+    initial_node_count       = 4
 
-  network    = google_compute_network.vpc.name
-  subnetwork = google_compute_subnetwork.subnet.name
+    network    = google_compute_network.vpc.name
+    subnetwork = google_compute_subnetwork.subnet.name
+  }
 }
 
 # Separately Managed Node Pool
@@ -34,7 +50,7 @@ resource "google_container_node_pool" "primary_nodes" {
     }
 
     # preemptible  = true
-    machine_type = "n1-standard-4"
+    machine_type = "n2-standard-2"
     tags         = ["gke-node", "${var.project_id}-gke"]
     metadata = {
       disable-legacy-endpoints = "true"
