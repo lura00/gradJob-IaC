@@ -6,3 +6,7 @@ breakingbad-gke-gradjob-30d6e875263f.json
 # .tfstate files
 *.tfstate
 *.tfstate.*
+
+argocd.tf
+
+manifests/argocd/*.yaml
