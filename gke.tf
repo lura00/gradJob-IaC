@@ -6,7 +6,7 @@ resource "google_container_cluster" "primary" {
   name     = "${var.project_id}-gke"
   location = var.location
   cluster_autoscaling {
-    enabled             = true
+    enabled = true
     resource_limits {
       resource_type = "cpu"
       minimum       = 1
