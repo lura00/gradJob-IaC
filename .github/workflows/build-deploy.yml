@@ -14,6 +14,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Terraform destroy
+      run: terraform destroy -auto-approve
+
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
 
