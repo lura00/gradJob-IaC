@@ -9,18 +9,18 @@ variable "gke_password" {
 }
 
 variable "gke_num_nodes" {
-  default     = 4
+  default     = 2
   description = "number of gke nodes"
 }
 
 variable "project_id" {
-  description = "project id"
+  description = "breakingbad-w-kbit"
 }
 
 variable "region" {
-  description = "region"
+  description = "europe-west1"
 }
 
 variable "location" {
-  description = "location"
+  description = "europe-west1-c"
 }

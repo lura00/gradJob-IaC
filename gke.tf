@@ -13,6 +13,15 @@ resource "google_container_cluster" "primary" {
 
   network    = google_compute_network.vpc.name
   subnetwork = google_compute_subnetwork.subnet.name
+
+  addons_config {
+    http_load_balancing {
+      disabled = false
+    }
+    horizontal_pod_autoscaling {
+      disabled = false
+    }
+  }
 }
 
 # Separately Managed Node Pool
@@ -38,6 +47,14 @@ resource "google_container_node_pool" "primary_nodes" {
     metadata = {
       disable-legacy-endpoints = "true"
     }
+  }
+  management {
+    auto_repair  = true
+    auto_upgrade = true
+  }
+  autoscaling {
+    min_node_count = 2
+    max_node_count = 4
   }
 }
 
